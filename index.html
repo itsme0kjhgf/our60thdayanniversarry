@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60 Days Celebration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4, #fbc2eb);
+            overflow-x: hidden;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1.5s ease-out forwards;
+            max-width: 90%;
+            word-wrap: break-word;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .poem {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            color: #333;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .interactive {
+            margin: 3rem auto;
+            max-width: 600px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .interactive button {
+            margin: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            background: #fbc2eb;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .interactive button:hover {
+            background: #fad0c4;
+        }
+
+        .quiz-option {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            background: #fbc2eb;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .quiz-option:hover {
+            background: #fad0c4;
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50;
+        }
+
+        .quiz-option.incorrect {
+            background: #f44336;
+        }
+
+        .fireworks-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            pointer-events: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            animation: firework 2s ease-out infinite;
+        }
+
+        @keyframes firework {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+                max-width: 80%;
+            }
+            .poem {
+                font-size: 1rem;
+            }
+        }
+
+        .thank-you {
+            margin: 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .thank-you p {
+            margin-top: 1rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Celebrating 60 Days Together</h1>
+        <div class="scroll-indicator">&#8595;</div>
+    </header>
+
+    <section class="section">
+        <h2>Our Journey</h2>
+        <p>Celebrate sixty days of love, growth, and cherished memories.</p>
+        <div class="poem">
+            "Two souls, one heart, a journey begun,<br>
+            Sixty days of joy, our hearts as one.<br>
+            Through sunsets and dawns, our story unfolds,<br>
+            A love like no other, a bond untold."
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>A Milestone Worth Remembering</h2>
+        <p>Explore moments that defined our story.</p>
+        <div class="poem">
+            "Each day a chapter, each moment a rhyme,<br>
+            Together we conquer the sands of time.<br>
+            In your eyes, I see the stars so bright,<br>
+            Sixty days of wonder, pure delight."
+        </div>
+    </section>
+
+    <section class="section interactive">
+        <h2>10 Reasons Why I Love You</h2>
+        <p>Click to reveal reasons:</p>
+        <div id="reasons-container"></div>
+        <script>
+            const reasons = [
+                "The way you smile brightens my day.",
+                "Your soul is pure and beautiful.",
+                "The little things you do, like drawing in class.",
+                "Your taste in music is impeccable.",
+                "The way you think about life inspires me.",
+                "Your kindness towards everyone around you.",
+                "How you always remember the smallest details about us.",
+                "Your laughter is contagious and warms my heart.",
+                "The way you support me no matter what.",
+                "I don’t know why I love you, but I love every detail about you."
+            ];
+
+            const container = document.getElementById('reasons-container');
+
+            reasons.forEach((reason, index) => {
+                const button = document.createElement('button');
+                button.textContent = `Reason ${index + 1}`;
+                button.addEventListener('click', () => {
+                    button.textContent = reason;
+                });
+                container.appendChild(button);
+            });
+        </script>
+    </section>
+
+    <section class="section interactive">
+        <h2>Love Quiz</h2>
+        <p>Test your knowledge about each other:</p>
+        <div id="quiz-container"></div>
+        <script>
+            const quizQuestions = [
+                { question: "What does she prefer more: chocolate or caramel?", options: ["Chocolate", "Caramel"], answer: "Chocolate" },
+                { question: "What is her favorite color?", options: ["Blue", "Pink", "Green"], answer: "Blue" },
+                { question: "What’s your favorite way to relax?", options: ["Reading", "Walking", "Listening to music"], answer: "Reading" },
+                { question: "What's her favorite movie genre?", options: ["Romantic", "Action", "Comedy"], answer: "Romantic" }
+            ];
+
+            const quizContainer = document.getElementById('quiz-container');
+
+            quizQuestions.forEach((quiz, index) => {
+                const div = document.createElement('div');
+                div.innerHTML = `<p>Q${index + 1}: ${quiz.question}</p>`;
+                const shuffledOptions = quiz.options.sort(() => Math.random() - 0.5); // Shuffle options
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('quiz-option');
+                    button.addEventListener('click', () => {
+                        if (option === quiz.answer) {
+                            button.classList.add('correct');
+                        } else {
+                            button.classList.add('incorrect');
+                        }
+                    });
+                    div.appendChild(button);
+                });
+                quizContainer.appendChild(div);
+            });
+        </script>
+    </section>
+
+    <section class="thank-you">
+        <h2>Thank You</h2>
+        <p>Thanks for keeping this secret: Jebli, Chems, Sara, Aarass, Fadel, Youssef, Jiji, Nisso, and our cupid Rafiq.</p>
+    </section>
+
+    <div class="fireworks-container"></div>
+
+    <audio autoplay loop>
+        <source src="heather.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Fireworks Animation Script
+        const containerFireworks = document.querySelector('.fireworks-container');
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.left = `${Math.random() * 100}%`;
+            firework.style.top = `${Math.random() * 100}%`;
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            firework.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            containerFireworks.appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 2000);
+        }
+
+        setInterval(createFirework, 300);
+    </script>
+</body>
+</html>
