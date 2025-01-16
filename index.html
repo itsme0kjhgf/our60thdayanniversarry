@@ -402,35 +402,53 @@ h3 {
         <p>Test your knowledge about each other:</p>
         <div id="quiz-container"></div>
         <script>
-            const quizQuestions = [
-                { question: "What does she prefer more: chocolate or caramel?", options: ["Chocolate", "Caramel"], answer: "Caramel" },
-                { question: "What is her favorite color?", options: ["Blue", "Pink", "Green"], answer: "Blue" },
-                { question: "What’s your favorite way to relax?", options: ["Drawing", "Chilling", "Listening to music"], answer: "Drawing" },
-                { question: "What's her favorite movie genre?", options: ["Romantic", "Action", "Comedy"], answer: "Romantic" }
-            ];
+const quizQuestions = [
+    { question: "What does she prefer more: chocolate or caramel?", options: ["Chocolate", "Caramel"], answer: "Caramel" },
+    { question: "What is her favorite color?", options: ["Blue", "Pink", "Green"], answer: "Blue" },
+    { question: "What’s your favorite way to relax?", options: ["Drawing", "Chilling", "Listening to music"], answer: "Drawing" },
+    { question: "What's her favorite movie genre?", options: ["Romantic", "Action", "Comedy"], answer: "Romantic" }
+];
 
-            const quizContainer = document.getElementById('quiz-container');
+const quizContainer = document.getElementById('quiz-container');
 
-            quizQuestions.forEach((quiz, index) => {
-                const div = document.createElement('div');
-                div.innerHTML = `<p>Q${index + 1}: ${quiz.question}</p>`;
-                const shuffledOptions = quiz.options.sort(() => Math.random() - 0.5); // Shuffle options
-                shuffledOptions.forEach(option => {
-                    const button = document.createElement('button');
-                    button.textContent = option;
-                    button.classList.add('quiz-option');
-                    button.addEventListener('click', () => {
-                        if (option === quiz.answer) {
-                            button.style.backgroundColor = '#84fab0'; // Correct answer
-                        } else {
-                            button.style.backgroundColor = '#fbb034'; // Incorrect answer
-                        }
-                    });
-                    div.appendChild(button);
-                });
-                quizContainer.appendChild(div);
+let questionIndex = 0; // Start from the first question
+
+// Load the sound file
+const correctSound = new Audio('https://www.soundjay.com/button/beep-07.wav'); // You can replace this with your own sound file URL
+
+function showNextQuestion() {
+    if (questionIndex < quizQuestions.length) {
+        const quiz = quizQuestions[questionIndex];
+        const div = document.createElement('div');
+        div.innerHTML = `<p>Q${questionIndex + 1}: ${quiz.question}</p>`;
+        const shuffledOptions = quiz.options.sort(() => Math.random() - 0.5); // Shuffle options
+        shuffledOptions.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.classList.add('quiz-option');
+            button.addEventListener('click', () => {
+                if (option === quiz.answer) {
+                    button.style.backgroundColor = '#007BFF'; // Correct answer color (blue)
+                    correctSound.play(); // Play sound for correct answer
+                    questionIndex++; // Move to the next question
+                    setTimeout(showNextQuestion, 1000); // Delay before showing the next question
+                } else {
+                    button.style.backgroundColor = '#fbb034'; // Incorrect answer color (orange)
+                }
             });
-        </script>
+            div.appendChild(button);
+        });
+        quizContainer.appendChild(div);
+    } else {
+        // All questions answered
+        const completedMessage = document.createElement('p');
+        completedMessage.textContent = "Congratulations, you've completed the quiz!";
+        quizContainer.appendChild(completedMessage);
+    }
+}
+
+showNextQuestion(); // Initial call to start the quiz
+</script>
     </section>
     
 
