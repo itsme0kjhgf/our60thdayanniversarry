@@ -3,14 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>60 Days Celebration</title> <!-- Title added here -->
+    <title>60 Days Celebration</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             font-family: 'Playfair Display', serif;
-            background: linear-gradient(to bottom, #ff9a9e, #fad0c4, #fbc2eb);
+            background: linear-gradient(270deg, #ff9a9e, #fad0c4, #ffda79, #fbb034, #84fab0, #8fd3f4, #a6c0fe);
+            background-size: 800% 800%;
+            animation: gradientAnimation 12s ease infinite;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 50%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: -1;
+        }
+
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .intro-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-overlay h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         header {
@@ -18,10 +74,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
             position: relative;
-            overflow: hidden;
             text-align: center;
+            overflow: hidden;
         }
 
         header h1 {
@@ -82,48 +137,25 @@
         .interactive button {
             margin: 0.5rem;
             padding: 0.8rem 1.2rem;
-            background: #fbc2eb;
-            border: 2px solid #d3a7e7;
+            background: #84fab0;
+            border: 2px solid #8fd3f4;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1.1rem;
             color: #333;
-            transition: all 0.3s ease;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
         .interactive button:hover {
-            background: #fad0c4;
-            transform: translateY(-3px);
-            border-color: #d3a7e7; /* Keep the border color instead of changing to white */
+            background: #a6c0fe;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .quiz-option {
-            display: inline-block;
-            margin: 0.5rem;
-            padding: 0.8rem 1.2rem;
-            background: #fbc2eb;
-            border: 2px solid #d3a7e7;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-
-        .quiz-option:hover {
-            background: #fad0c4;
-            transform: translateY(-3px);
-            border-color: #d3a7e7; /* Keep the border color instead of changing to white */
-        }
-
-        .quiz-option.correct {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .quiz-option.incorrect {
-            background: #f44336;
-            color: white;
+        .interactive button:active {
+            background: #8fd3f4;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transform: none;
         }
 
         .fireworks-container {
@@ -179,9 +211,132 @@
             margin-top: 1rem;
             font-style: italic;
         }
+
+
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 2rem;
+}
+
+.countdown-item {
+    border-radius: 20px;
+    padding: 2rem;
+    width: 250px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Applies blur to the background */
+    -webkit-backdrop-filter: blur(10px); /* Ensures compatibility with Safari */
+    color: white; /* White text to contrast with the background */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for extra sharpness */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+}
+
+.countdown-item:hover {
+    transform: scale(1.05); /* Slight scale effect on hover for interactivity */
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow on hover */
+}
+
+.countdown-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.countdown-timer {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #444;
+    background: linear-gradient(145deg, #84fab0, #8fd3f4);
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    letter-spacing: 2px;
+    width: fit-content;
+    margin: 0 auto;
+    transition: background 0.5s ease, box-shadow 0.3s ease-in-out;
+}
+
+.countdown-timer span {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.countdown-timer span .number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.countdown-timer span .label {
+    font-size: 1.1rem;
+    color: #ff0505;
+    text-transform: uppercase;
+}
+
+.countdown-timer:hover {
+    background: linear-gradient(145deg, #ff9a9e, #fbb034);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 768px) {
+    /* Adjust the countdown item */
+    .countdown-item {
+        width: 200px; /* Decrease width for smaller screens */
+        padding: 1.5rem;
+    }
+
+    .countdown-timer {
+        font-size: 2rem; /* Reduce font size */
+        padding: 1rem;
+    }
+
+    /* Adjust the header text size */
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    /* Make the scroll indicator fit better */
+    .scroll-indicator {
+        font-size: 2rem; /* Adjust size */
+        bottom: 5%;
+    }
+
+    /* Adjust the intro overlay */
+    .intro-overlay h1 {
+        font-size: 2rem;
+    }
+}
+.intro-overlay h1 {
+    font-size: 2.5rem; /* Adjust font size for mobile */
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.intro-overlay {
+    height: 100vh;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+
+
     </style>
 </head>
 <body>
+    <div class="intro-overlay" id="intro">
+        <h1>To the Love of My Life</h1>
+    </div>
+
     <header>
         <h1>Celebrating 60 Days Together</h1>
         <div class="scroll-indicator">&#8595;</div>
@@ -234,6 +389,8 @@
                 button.textContent = `Reason ${index + 1}`;
                 button.addEventListener('click', () => {
                     button.textContent = reason;
+                    button.style.backgroundColor = '#8fd3f4'; // Change background color on click
+                    button.style.color = '#fff'; // Change text color on click
                 });
                 container.appendChild(button);
             });
@@ -264,9 +421,9 @@
                     button.classList.add('quiz-option');
                     button.addEventListener('click', () => {
                         if (option === quiz.answer) {
-                            button.classList.add('correct');
+                            button.style.backgroundColor = '#84fab0'; // Correct answer
                         } else {
-                            button.classList.add('incorrect');
+                            button.style.backgroundColor = '#fbb034'; // Incorrect answer
                         }
                     });
                     div.appendChild(button);
@@ -275,6 +432,7 @@
             });
         </script>
     </section>
+    
 
     <section class="thank-you">
         <h2>Thank You</h2>
@@ -282,6 +440,38 @@
     </section>
 
     <div class="fireworks-container"></div>
+
+
+    <div class="countdown-container">
+        <!-- Divider Line -->
+        <div class="divider"></div>
+    
+        <!-- Countdown Section -->
+        <div class="countdown-section">
+            <h2>.  Events Countdown   .</h2>
+    
+            <!-- Countdown for your Birthday -->
+            <div class="countdown-item" id="birthday1">
+                <h3>Your Birthday</h3>
+                <div id="countdown1" class="countdown-timer"></div>
+            </div>
+    
+            <!-- Countdown for her Birthday -->
+            <div class="countdown-item" id="birthday2">
+                <h3>Her Birthday</h3>
+                <div id="countdown2" class="countdown-timer"></div>
+            </div>
+    
+            <!-- Countdown for December 3rd Anniversary -->
+            <div class="countdown-item" id="anniversary">
+                <h3>Our first year anniversary</h3>
+                <div id="countdown3" class="countdown-timer"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
 
     <audio autoplay loop>
         <source src="heather.mp3" type="audio/mpeg">
@@ -305,7 +495,51 @@
             }, 2000);
         }
 
-        setInterval(createFirework, 300);
+        // Fade out the intro overlay after 2 seconds
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById('intro').classList.add('hidden');
+            }, 2000);
+        };
+
+       // Function to calculate countdown for each event
+function calculateCountdown(dateString, elementId) {
+    const targetDate = new Date(dateString).getTime();
+    const countdownElement = document.getElementById(elementId);
+
+    const interval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance >= 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = 
+                `<span><span class="number">${days}</span><span class="label">Days</span></span>
+                 <span><span class="number">${hours}</span><span class="label">Hours</span></span>
+                 <span><span class="number">${minutes}</span><span class="label">Minutes</span></span>
+                 <span><span class="number">${seconds}</span><span class="label">Seconds</span></span>`;
+        } else {
+            countdownElement.innerHTML = "<span>Event has passed</span>";
+            clearInterval(interval);
+        }
+    }, 1000);
+}
+
+// Initialize countdowns for all events
+calculateCountdown("2025-06-11T00:00:00", "countdown1"); // Your Birthday
+calculateCountdown("2025-01-22T00:00:00", "countdown2"); // Her Birthday
+calculateCountdown("2025-12-03T00:00:00", "countdown3"); // December 3rd Anniversary
+</script>
+</body>
+</html>
+
+
+
+
     </script>
 </body>
 </html>
