@@ -5,7 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>60 Days Celebration</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
     <style>
+
+        #heartContainer {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    transform: rotate(45deg);
+    animation: floatUp 3s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: 10px;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-300px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
         body {
             margin: 0;
             font-family: 'Playfair Display', serif;
@@ -328,6 +375,50 @@ h3 {
     box-sizing: border-box;
 }
 
+#heartContainer {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Adjust based on design */
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    transform: rotate(45deg);
+    animation: floatUp 3s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: 10px;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-300px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
 
 
     </style>
@@ -442,22 +533,50 @@ function showNextQuestion() {
     } else {
         // All questions answered
         const completedMessage = document.createElement('p');
-        completedMessage.textContent = "Congratulations, you've completed the quiz!";
-        quizContainer.appendChild(completedMessage);
+
+    // Trigger fireworks
+    triggerFireworks();
+}
+function onQuizComplete() {
+            completedMessage.textContent = "Congratulations, you've completed the quiz!";
+            quizContainer.appendChild(completedMessage);
+    alert("Quiz Complete! You've done an amazing job!");
+
+
     }
 }
 
 showNextQuestion(); // Initial call to start the quiz
+
+// func to trigger fireworks
+
+function triggerFireworks() {
+    const duration = 5000; // 5 seconds
+    const end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 5,
+            angle: Math.random() * 360,
+            spread: 55,
+            origin: { x: Math.random(), y: Math.random() - 0.2 },
+            colors: ['#ff0000', '#ff80ed', '#ffcc00', '#00ff00', '#00ccff'],
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
+}
+
 </script>
     </section>
     
 
-    <section class="thank-you">
-        <h2>Thank You</h2>
-        <p>Thanks for keeping this secret: Jebli, Chems, Sara, Aarass, Fadel, Youssef, Jiji, Nisso, and our cupid Rafiq.</p>
-    </section>
+   
 
     <div class="fireworks-container"></div>
+    
 
 
     <div class="countdown-container">
@@ -473,13 +592,7 @@ showNextQuestion(); // Initial call to start the quiz
                 <h3>Your Birthday</h3>
                 <div id="countdown1" class="countdown-timer"></div>
             </div>
-    
-            <!-- Countdown for her Birthday -->
-            <div class="countdown-item" id="birthday2">
-                <h3>Her Birthday</h3>
-                <div id="countdown2" class="countdown-timer"></div>
-            </div>
-    
+
             <!-- Countdown for December 3rd Anniversary -->
             <div class="countdown-item" id="anniversary">
                 <h3>Our first year anniversary</h3>
@@ -547,9 +660,9 @@ function calculateCountdown(dateString, elementId) {
     }, 1000);
 }
 
+
 // Initialize countdowns for all events
 calculateCountdown("2025-06-11T00:00:00", "countdown1"); // Your Birthday
-calculateCountdown("2025-01-22T00:00:00", "countdown2"); // Her Birthday
 calculateCountdown("2025-12-03T00:00:00", "countdown3"); // December 3rd Anniversary
 </script>
 </body>
@@ -559,5 +672,10 @@ calculateCountdown("2025-12-03T00:00:00", "countdown3"); // December 3rd Anniver
 
 
     </script>
+    
+    <section class="thank-you">
+        <h2>Thank You</h2>
+        <p>Thanks for keeping this secret: Jebli, Chems, Sara, Aarass, Fadel, Youssef, Jiji, Nisso, and our cupid Rafiq.</p>
+    </section>
 </body>
 </html>
