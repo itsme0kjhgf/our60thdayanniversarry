@@ -576,9 +576,68 @@ function triggerFireworks() {
    
 
     <div class="fireworks-container"></div>
-    
-
-
+    <section class="about-us">
+        <div class="about-us-container">
+          <h2>Our Story</h2>
+          <p>
+            It all started one day when I was on a transport scolaire with my friends. I looked up into the mirror and there she was – the most beautiful girl I had ever seen in my life. It felt like a dream. From that moment, I couldn’t stop thinking about her. The next year, we ended up in the same class, and I was beyond happy.
+          </p>
+          <p>
+            I was shy at first, but she made the first move by asking for my Instagram, and from there, we started chatting every Friday and Saturday night. Those were the best nights – we'd always say goodnight to each other, and I couldn't wait for the next conversation.
+          </p>
+          <p>
+            Before we started dating, I was afraid to tell her how I felt, but with the encouragement of our friend Rafiq, I finally found the courage. On December 3rd, I told her my true feelings. To my relief, she had felt the same way all along. She had been afraid of losing such an amazing friendship by sharing her feelings.
+          </p>
+          <p>
+            From that day on, I became the happiest person alive. Every day with her feels like a dream, and I can’t wait to see what the future holds for us.
+          </p>
+        </div>
+      </section>
+      
+      <style>
+        /* Ensure the section takes full height of the screen */
+        body, html {
+          height: 100%;
+          margin: 0;
+        }
+      
+        .about-us {
+          display: flex;
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+          height: 100vh; /* Take full height of the viewport */
+          background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+          color: #333;
+          text-align: center;
+          backdrop-filter: blur(10px); /* Glassmorphism effect */
+          border-radius: 15px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+      
+        .about-us-container {
+          max-width: 800px;
+          padding: 20px; /* Adjusted padding for better fit */
+          width: 100%; /* Ensure it fits within the available space */
+        }
+      
+        .about-us h2 {
+          font-size: 2.5em;
+          margin-bottom: 20px;
+          color: #fff; /* White text to contrast with the background */
+        }
+      
+        .about-us p {
+          font-size: 1.2em;
+          line-height: 1.6;
+          margin-bottom: 20px;
+          color: #fff; /* White text for readability */
+        }
+      
+        .about-us p:last-child {
+          margin-bottom: 0;
+        }
+      </style>
+      
     <div class="countdown-container">
         <!-- Divider Line -->
         <div class="divider"></div>
@@ -586,12 +645,20 @@ function triggerFireworks() {
         <!-- Countdown Section -->
         <div class="countdown-section">
             <h2>.  Events Countdown   .</h2>
+
+
+                <!-- Countdown for her birthday -->    
+            <div class="countdown-item" id="birthday2">
+                <h3>Your Birthday</h3>
+                 <div id="countdown2" class="countdown-timer"></div>
+            </div>
     
             <!-- Countdown for your Birthday -->
             <div class="countdown-item" id="birthday1">
-                <h3>My Birthday</h3>
+                <h3>my Birthday</h3>
                 <div id="countdown1" class="countdown-timer"></div>
             </div>
+
 
             <!-- Countdown for December 3rd Anniversary -->
             <div class="countdown-item" id="anniversary">
@@ -662,8 +729,9 @@ function calculateCountdown(dateString, elementId) {
 
 
 // Initialize countdowns for all events
+calculateCountdown("2025-12-03T00:00:00", "countdown3"); // her birthday
 calculateCountdown("2025-06-11T00:00:00", "countdown1"); // Your Birthday
-calculateCountdown("2025-12-03T00:00:00", "countdown3"); // December 3rd Anniversary
+calculateCountdown("2025-01-22T00:00:00", "countdown2"); // December 3rd Anniversary
 </script>
 </body>
 </html>
@@ -674,7 +742,7 @@ calculateCountdown("2025-12-03T00:00:00", "countdown3"); // December 3rd Anniver
     </script>
     
     <section class="thank-you">
-        <h2>Thank You</h2>
+        <h2>Thanks</h2>
         <p>Thanks for keeping this secret: Jebli, Chems, Sara, Aarass, Fadel, Youssef, Jiji, Nisso, and our cupid Rafiq.</p>
     </section>
 </body>
